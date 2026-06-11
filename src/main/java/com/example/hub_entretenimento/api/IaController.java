@@ -17,9 +17,12 @@ public class IaController {
     }
 
     @GetMapping("/recomendar")
-    public RecomendacaoFilmeDTO obterRecomendacao(@RequestParam String gostoDoUsuario) {
-        System.out.println("--> O Angular bateu no endpoint! Gosto recebido: " + gostoDoUsuario);
+    public RecomendacaoFilmeDTO obterRecomendacao(
+            @RequestParam String gostoDoUsuario,
+            @RequestHeader(value = "X-Session-Id", defaultValue = "sessao-padrao") String sessionId) {
 
-        return entretenimentoService.buscarRecomendacaoInteligente(gostoDoUsuario);
+
+        // Repassa o gosto e o ID da sessão para a camada de serviço persistir no Neo4j
+        return entretenimentoService.buscarRecomendacaoInteligente(gostoDoUsuario, sessionId);
     }
 }
