@@ -36,7 +36,8 @@ class IaControllerTest {
                 "Stanley Kubrick",
                 "Uma família vai para um hotel isolado e as coisas ficam assustadoras.",
                 List.of("Terror", "Suspense"),
-                "Porque é um clássico de terror dos anos 80."
+                "Porque é um clássico de terror dos anos 80.",
+                "sessao-padrao"
         );
 
         when(entretenimentoService.buscarRecomendacaoInteligente(gostoUsuario, "sessao-padrao"))
