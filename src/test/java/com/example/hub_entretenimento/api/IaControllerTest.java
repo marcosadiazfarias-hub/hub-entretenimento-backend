@@ -39,11 +39,11 @@ class IaControllerTest {
                 "Porque é um clássico de terror dos anos 80."
         );
 
-        when(entretenimentoService.buscarRecomendacaoInteligente(gostoUsuario))
+        when(entretenimentoService.buscarRecomendacaoInteligente(gostoUsuario, "sessao-padrao"))
                 .thenReturn(recomendacaoEsperada);
 
         // Act
-        RecomendacaoFilmeDTO resultado = iaController.obterRecomendacao(gostoUsuario);
+        RecomendacaoFilmeDTO resultado = iaController.obterRecomendacao(gostoUsuario, "sessao-padrao");
 
         // Assert
         assertEquals(recomendacaoEsperada, resultado);
@@ -51,6 +51,6 @@ class IaControllerTest {
         assertEquals(1980, resultado.anoLancamento());
         
         // Verifica se o serviço foi chamado corretamente com o parâmetro recebido
-        verify(entretenimentoService, times(1)).buscarRecomendacaoInteligente(gostoUsuario);
+        verify(entretenimentoService, times(1)).buscarRecomendacaoInteligente(gostoUsuario, "sessao-padrao");
     }
 }

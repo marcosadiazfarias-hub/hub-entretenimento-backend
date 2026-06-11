@@ -8,5 +8,6 @@ public record RecomendacaoFilmeDTO(
         String diretor,
         String sinopseCurta,
         List<String> generos,
-        String justificativaRecomendacao
+        String justificativaRecomendacao,
+        String sessionId // <-- Adicionado para manter o rastreamento no Frontend
 ) {}
