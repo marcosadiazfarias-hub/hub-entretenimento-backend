@@ -2,27 +2,32 @@ package com.example.hub_entretenimento.domain;
 
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
+import java.util.ArrayList;
 import java.util.List;
 
 @Node("Filme")
 public class Filme {
 
     @Id
-    private String titulo; // Usaremos o título como ID único para simplificar e evitar duplicados
-
+    private String titulo;
     private int anoLancamento;
-    private String diretor;
     private String sinopseCurta;
-    private List<String> generos;
+
+    // NOVO RELACIONAMENTO: Liga o filme ao seu nó Diretor
+    @Relationship(type = "DIRIGIDO_POR", direction = Relationship.Direction.OUTGOING)
+    private Diretor diretor;
+
+    // NOVO RELACIONAMENTO: Liga o filme a múltiplos nós de Gênero
+    @Relationship(type = "PERTENCE_AO", direction = Relationship.Direction.OUTGOING)
+    private List<Genero> generos = new ArrayList<>();
 
     public Filme() {}
 
-    public Filme(String titulo, int anoLancamento, String diretor, String sinopseCurta, List<String> generos) {
+    public Filme(String titulo, int anoLancamento, String sinopseCurta) {
         this.titulo = titulo;
         this.anoLancamento = anoLancamento;
-        this.diretor = diretor;
         this.sinopseCurta = sinopseCurta;
-        this.generos = generos;
     }
 
     // Getters e Setters
@@ -30,10 +35,10 @@ public class Filme {
     public void setTitulo(String titulo) { this.titulo = titulo; }
     public int getAnoLancamento() { return anoLancamento; }
     public void setAnoLancamento(int anoLancamento) { this.anoLancamento = anoLancamento; }
-    public String getDiretor() { return diretor; }
-    public void setDiretor(String diretor) { this.diretor = diretor; }
     public String getSinopseCurta() { return sinopseCurta; }
     public void setSinopseCurta(String sinopseCurta) { this.sinopseCurta = sinopseCurta; }
-    public List<String> getGeneros() { return generos; }
-    public void setGeneros(List<String> generos) { this.generos = generos; }
+    public Diretor getDiretor() { return diretor; }
+    public void setDiretor(Diretor diretor) { this.diretor = diretor; }
+    public List<Genero> getGeneros() { return generos; }
+    public void setGeneros(List<Genero> generos) { this.generos = generos; }
 }

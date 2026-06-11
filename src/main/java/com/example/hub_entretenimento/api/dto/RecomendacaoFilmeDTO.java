@@ -3,11 +3,15 @@ package com.example.hub_entretenimento.api.dto;
 import java.util.List;
 
 public record RecomendacaoFilmeDTO(
-        String titulo,
-        int anoLancamento,
-        String diretor,
-        String sinopseCurta,
-        List<String> generos,
         String justificativaRecomendacao,
-        String sessionId // <-- Adicionado para manter o rastreamento no Frontend
-) {}
+        List<DetalheFilmeDTO> filmes
+) {
+    // Record auxiliar para encapsular os dados de cada filme da lista
+    public record DetalheFilmeDTO(
+            String titulo,
+            int anoLancamento,
+            String diretor,
+            String sinopseCurta,
+            List<String> generos
+    ) {}
+}
