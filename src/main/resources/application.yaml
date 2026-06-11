@@ -9,3 +9,8 @@ spring:
           options:
             model: gemini-3.1-flash-lite
             temperature: 0.4
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: senha123
